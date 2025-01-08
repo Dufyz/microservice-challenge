@@ -1,0 +1,15 @@
+meta {
+  name: GET Item by id
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{api_url}}/items/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 1
+}

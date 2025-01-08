@@ -1,0 +1,18 @@
+meta {
+  name: POST Item
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{api_url}}/items
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "name",
+    "quantity": 1
+  }
+}
