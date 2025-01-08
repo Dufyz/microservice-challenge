@@ -1,0 +1,15 @@
+meta {
+  name: DELETE Inventory Transaction
+  type: http
+  seq: 2
+}
+
+delete {
+  url: {{api_url}}/inventory-transactions/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 1
+}

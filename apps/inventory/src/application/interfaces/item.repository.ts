@@ -9,6 +9,6 @@ export type ItemRepository = {
   ): Promise<Either<RepositoryErrors, Item>>;
   update(
     id: number,
-    body: Partial<Pick<Item, "name" | "quantity">>
+    body: Partial<Pick<Item, "name">>
   ): Promise<Either<RepositoryErrors, Item>>;
 };

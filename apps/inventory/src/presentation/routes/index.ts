@@ -1,5 +1,6 @@
 import { Router } from "express";
 import itemRoutes from "./item.routes";
+import inventoryTransactionRoutes from "./inventory_transaction.routes";
 
 const routes = Router();
 const apiRoutes = Router();
@@ -9,6 +10,7 @@ apiRoutes.get("/health-check", (_, res) => {
 });
 
 apiRoutes.use(itemRoutes);
+apiRoutes.use(inventoryTransactionRoutes);
 
 routes.use("/api", apiRoutes);
 

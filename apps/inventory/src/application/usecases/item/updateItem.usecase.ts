@@ -7,7 +7,7 @@ export const updateItem =
   (itemRepository: ItemRepository) =>
   async (
     id: number,
-    body: Partial<Pick<Item, "name" | "quantity">>
+    body: Partial<Pick<Item, "name">>
   ): Promise<Either<RepositoryErrors, Item>> => {
     const itemOrError = await itemRepository.update(id, body);
 

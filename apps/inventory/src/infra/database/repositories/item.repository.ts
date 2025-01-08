@@ -21,8 +21,6 @@ export const itemRepository: ItemRepository = {
 
       if (!item) return success(null);
 
-      console.log("Item found: ", item);
-
       return success(parseItemFromDB(item as Item));
     } catch (e: any) {
       return failure(getRepositoryError(e));
@@ -50,11 +48,8 @@ export const itemRepository: ItemRepository = {
   },
   update: async (id, body) => {
     try {
-      const itemToUpdate: Partial<
-        Pick<Item, "name" | "quantity" | "updated_at">
-      > = {
+      const itemToUpdate: Partial<Pick<Item, "name" | "updated_at">> = {
         name: body.name,
-        quantity: body.quantity,
         updated_at: new Date(),
       };
 
