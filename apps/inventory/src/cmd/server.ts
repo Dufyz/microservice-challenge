@@ -3,6 +3,8 @@ import express from "express";
 import { NODE_ENV, SERVER_PORT } from "../infra/config";
 import routes from "../presentation/routes";
 
+require("dotenv").config();
+
 // TODO: Rate limiter
 // TODO: Error handling middleware
 // TODO: Graceful shutdown
@@ -11,7 +13,7 @@ import routes from "../presentation/routes";
 const app = express();
 
 app.use(helmet());
-
+app.use(express.json());
 app.use(routes);
 
 const server = app.listen(SERVER_PORT, () => {

@@ -1,7 +1,7 @@
 import postgres from "postgres";
 import { DB_CONNECTION } from "../config";
 
-if (!DB_CONNECTION) throw new Error("Check POSTGRES_URL_CONNECTION env");
+if (!DB_CONNECTION) throw new Error("Check DB_CONNECTION env");
 
 const sql = postgres(DB_CONNECTION, {
   prepare: false,
