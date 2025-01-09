@@ -17,7 +17,8 @@ export async function handlePostInventoryTransaction(
   >["body"];
 
   const inventoryTransactionOrError = await createInventoryTransaction(
-    inventoryTransactionRepository
+    inventoryTransactionRepository,
+    itemRepository
   )({
     item_id,
     quantity,
@@ -31,7 +32,10 @@ export async function handlePostInventoryTransaction(
     return;
   }
 
-  res.status(201).json(inventoryTransactionOrError.value);
+  res.status(201).json({
+    inventory_transaction: inventoryTransactionOrError.value,
+    message: "Inventory transaction created",
+  });
 }
 
 export async function handleDeleteInventoryTransaction(
@@ -43,7 +47,8 @@ export async function handleDeleteInventoryTransaction(
   >["params"];
 
   const voidOrError = await deleteInventoryTransaction(
-    inventoryTransactionRepository
+    inventoryTransactionRepository,
+    itemRepository
   )(id);
 
   if (voidOrError.isFailure()) {

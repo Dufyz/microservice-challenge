@@ -4,6 +4,7 @@ import { RepositoryErrors } from "../errors";
 
 export type ItemRepository = {
   findIemById(id: number): Promise<Either<RepositoryErrors, Item | null>>;
+  getItemQuantity(id: number): Promise<Either<RepositoryErrors, number>>;
   create(
     body: Pick<Item, "name" | "quantity">
   ): Promise<Either<RepositoryErrors, Item>>;
@@ -11,4 +12,8 @@ export type ItemRepository = {
     id: number,
     body: Partial<Pick<Item, "name">>
   ): Promise<Either<RepositoryErrors, Item>>;
+  updateQuantity(
+    id: number,
+    quantity: number
+  ): Promise<Either<RepositoryErrors, void>>;
 };

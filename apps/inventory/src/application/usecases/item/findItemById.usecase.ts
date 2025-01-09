@@ -11,6 +11,5 @@ export const findItemById =
     if (itemOrError.isFailure()) return failure(itemOrError.value);
 
     const item = itemOrError.value;
-
     return success(item);
   };

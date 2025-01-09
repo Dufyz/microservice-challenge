@@ -1,0 +1,21 @@
+meta {
+  name: POST Item inventory availability
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{api_url}}/items/:id/inventory/availability
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 1
+}
+
+body:json {
+  {
+    "quantity": 1
+  }
+}

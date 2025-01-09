@@ -5,10 +5,26 @@ import {
   parseInventoryTransactionFromDB,
 } from "../../../domain/inventory_transaction";
 import { failure, success } from "../../../shared/utils/either";
-import { filterObjNullishValues } from "../../../shared/utils/filterObjNullishValues";
 import sql from "../postgresql";
 
 export const inventoryTransactionRepository: InventoryTransactionRepository = {
+  findById: async (id) => {
+    try {
+      const [transaction] = await sql`
+          SELECT id, item_id, quantity, type, created_at
+          FROM inventory_transactions
+          WHERE id = ${id}
+      `;
+
+      if (!transaction) return success(null);
+
+      return success(
+        parseInventoryTransactionFromDB(transaction as InventoryTransaction)
+      );
+    } catch (e: any) {
+      return failure(getRepositoryError(e));
+    }
+  },
   create: async (body) => {
     try {
       const transactionToCreate: Pick<
@@ -20,11 +36,15 @@ export const inventoryTransactionRepository: InventoryTransactionRepository = {
         type: body.type,
       };
 
-      const insertObj = filterObjNullishValues(transactionToCreate);
-      const colsToInsert = Object.keys(insertObj) as (keyof typeof insertObj)[];
+      const colsToInsert = Object.keys(
+        transactionToCreate
+      ) as (keyof typeof transactionToCreate)[];
 
       const [transaction] = await sql`
-            INSERT INTO inventory_transactions ${sql(insertObj, colsToInsert)}
+            INSERT INTO inventory_transactions ${sql(
+              transactionToCreate,
+              colsToInsert
+            )}
             RETURNING id, item_id, quantity, type, created_at
         `;
 
@@ -35,7 +55,6 @@ export const inventoryTransactionRepository: InventoryTransactionRepository = {
       return failure(getRepositoryError(e));
     }
   },
-
   delete: async (id) => {
     try {
       await sql`
