@@ -19,4 +19,11 @@ module.exports = {
     },
     ssl: { rejectUnauthorized: false },
   },
+  test: {
+    client: "pg",
+    connection: process.env.DB_TEST_CONNECTION,
+    migrations: {
+      directory: "./src/infra/database/migrations",
+    },
+  },
 };

@@ -1,9 +1,9 @@
 import postgres from "postgres";
-import { DB_CONNECTION } from "../config";
+import { DB_CONNECTION, DB_TEST_CONNECTION, NODE_ENV } from "../config";
 
 if (!DB_CONNECTION) throw new Error("Check DB_CONNECTION env");
 
-const sql = postgres(DB_CONNECTION, {
+const sql = postgres(NODE_ENV === "test" ? DB_TEST_CONNECTION : DB_CONNECTION, {
   prepare: false,
   // debug(connection, query, parameters, paramTypes) {
   //   console.log({ connection, query, parameters });

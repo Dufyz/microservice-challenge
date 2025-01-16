@@ -12,3 +12,11 @@ services:
       POSTGRES_USER: postgres
     ports:
       - "5432:5432"
+  db-test:
+    container_name: inventory-db-test
+    image: postgres:12
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    ports:
+      - "5433:5432"
