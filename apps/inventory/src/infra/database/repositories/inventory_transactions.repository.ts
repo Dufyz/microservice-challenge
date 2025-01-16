@@ -11,7 +11,13 @@ export const inventoryTransactionRepository: InventoryTransactionRepository = {
   findById: async (id) => {
     try {
       const [transaction] = await sql`
-          SELECT id, item_id, quantity, type, created_at
+          SELECT 
+            id,
+            item_id,
+            quantity,
+            type,
+            created_at,
+            updated_at
           FROM inventory_transactions
           WHERE id = ${id}
       `;
@@ -45,7 +51,7 @@ export const inventoryTransactionRepository: InventoryTransactionRepository = {
               transactionToCreate,
               colsToInsert
             )}
-            RETURNING id, item_id, quantity, type, created_at
+            RETURNING id, item_id, quantity, type, created_at, updated_at
         `;
 
       return success(
