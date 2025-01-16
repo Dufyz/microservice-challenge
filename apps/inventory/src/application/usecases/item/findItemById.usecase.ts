@@ -6,7 +6,7 @@ import { ItemRepository } from "../../interfaces/item.repository";
 export const findItemById =
   (itemRepository: ItemRepository) =>
   async (id: number): Promise<Either<RepositoryErrors, Item | null>> => {
-    const itemOrError = await itemRepository.findIemById(id);
+    const itemOrError = await itemRepository.findItemById(id);
 
     if (itemOrError.isFailure()) return failure(itemOrError.value);
 

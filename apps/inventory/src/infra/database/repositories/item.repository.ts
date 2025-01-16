@@ -6,7 +6,7 @@ import { failure, success } from "../../../shared/utils/either";
 import sql from "../postgresql";
 
 export const itemRepository: ItemRepository = {
-  findIemById: async (id) => {
+  findItemById: async (id) => {
     try {
       const [item] = await sql`
         SELECT

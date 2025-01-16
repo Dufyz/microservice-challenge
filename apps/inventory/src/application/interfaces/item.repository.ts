@@ -3,7 +3,7 @@ import { Either } from "../../shared/utils/either";
 import { RepositoryErrors } from "../errors";
 
 export type ItemRepository = {
-  findIemById(id: number): Promise<Either<RepositoryErrors, Item | null>>;
+  findItemById(id: number): Promise<Either<RepositoryErrors, Item | null>>;
   getItemQuantity(id: number): Promise<Either<RepositoryErrors, number>>;
   create(
     body: Pick<Item, "name" | "quantity">
