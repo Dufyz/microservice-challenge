@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  kafka:
+    image: confluentinc/cp-kafka
+    ports:
+      - "9093:9092"
+  db:
+    container_name: order-db
+    image: postgres:12
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    ports:
+      - "54322:5432"
+  db-test:
+    container_name: order-db-test
+    image: postgres:12
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    ports:
+      - "54333:5432"
