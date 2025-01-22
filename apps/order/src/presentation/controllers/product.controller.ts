@@ -4,8 +4,8 @@ import {
   createProduct,
   findProductById,
   updateProduct,
-} from "../../../application/usecases/product";
-import { productRepository } from "../../database/repositories/product.repository";
+} from "../../application/usecases/product";
+import { productRepository } from "../../infra/database/repositories/product.repository";
 import { Request, Response } from "express";
 import { postProductSchema } from "../validators/schemas/product/postProduct.schema";
 import { patchProductSchema } from "../validators/schemas/product/patchProduct.schema";
@@ -22,8 +22,15 @@ export async function handleGetProduct(req: Request, res: Response) {
     return;
   }
 
+  const product = productOrError.value;
+
+  if (product === null) {
+    res.status(404).json({ message: "Product not found" });
+    return;
+  }
+
   res.status(200).json({
-    product: productOrError.value,
+    product: product,
     message: "Product found",
   });
 }

@@ -6,24 +6,24 @@ import { patchClientSchema } from "../validators/schemas/client/patchClient.sche
 import { postClientSchema } from "../validators/schemas/client/postClient.schema";
 import { getClientSchema } from "../validators/schemas/client/getClient.schema";
 
-const clientRouter = Router();
+const clientRoutes = Router();
 
-clientRouter.get(
+clientRoutes.get(
   "/clients/:id",
   validate(getClientSchema),
   ClientController.handleGetClient
 );
 
-clientRouter.post(
+clientRoutes.post(
   "/clients",
   validate(postClientSchema),
   ClientController.handlePostClient
 );
 
-clientRouter.patch(
+clientRoutes.patch(
   "/clients/:id",
   validate(patchClientSchema),
   ClientController.handlePatchClient
 );
 
-export default clientRouter;
+export default clientRoutes;

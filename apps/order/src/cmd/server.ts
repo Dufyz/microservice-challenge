@@ -1,7 +1,7 @@
 import helmet from "helmet";
 import express from "express";
 import { NODE_ENV, SERVER_PORT } from "../infra/config";
-import routes from "../infra/presentation/routes";
+import routes from "../presentation/routes";
 
 require("dotenv").config();
 

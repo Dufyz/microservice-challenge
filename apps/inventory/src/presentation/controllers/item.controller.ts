@@ -25,8 +25,15 @@ export async function handleGetItem(req: Request, res: Response) {
     return;
   }
 
+  const item = itemOrError.value;
+
+  if (item === null) {
+    res.status(404).json({ item, message: "Item not found" });
+    return;
+  }
+
   res.status(200).json({
-    item: itemOrError.value,
+    item,
     message: "Item found",
   });
 }

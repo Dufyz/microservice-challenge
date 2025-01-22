@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import z from "zod";
 import { postOrderSchema } from "../validators/schemas/order/postOrder.schema";
-import { createOrder } from "../../../application/usecases/order";
-import { orderRepository } from "../../database/repositories/order.repository";
-import { orderProductRepository } from "../../database/repositories/order_product.repository";
+import { createOrder } from "../../application/usecases/order";
+import { orderRepository } from "../../infra/database/repositories/order.repository";
+import { orderProductRepository } from "../../infra/database/repositories/order_product.repository";
 
 export async function handlePostOrder(req: Request, res: Response) {
   const body = req.body as unknown as z.infer<typeof postOrderSchema>["body"];

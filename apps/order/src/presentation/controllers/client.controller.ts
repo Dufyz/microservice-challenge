@@ -1,6 +1,6 @@
 import z from "zod";
 import { getClientSchema } from "../validators/schemas/client/getClient.schema";
-import { clientRepository } from "../../database/repositories/client.repository";
+import { clientRepository } from "../../infra/database/repositories/client.repository";
 import { Request, Response } from "express";
 import { postClientSchema } from "../validators/schemas/client/postClient.schema";
 import { patchClientSchema } from "../validators/schemas/client/patchClient.schema";
@@ -8,7 +8,7 @@ import {
   createClient,
   findClientById,
   updateClient,
-} from "../../../application/usecases/client";
+} from "../../application/usecases/client";
 
 export async function handleGetClient(req: Request, res: Response) {
   const { id } = req.params as unknown as z.infer<
@@ -22,8 +22,15 @@ export async function handleGetClient(req: Request, res: Response) {
     return;
   }
 
+  const client = clientOrError.value;
+
+  if (!client) {
+    res.status(404).json({ message: "Client not found" });
+    return;
+  }
+
   res.status(200).json({
-    client: clientOrError.value,
+    client: client,
     message: "Client found",
   });
 }
