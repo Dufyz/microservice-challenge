@@ -1,18 +1,17 @@
 meta {
-  name: POST Item
+  name: POST Client
   type: http
   seq: 2
 }
 
 post {
-  url: {{api_url}}/items
+  url: {{order_api_url}}/clients
   body: json
   auth: none
 }
 
 body:json {
   {
-    "name": "name",
-    "quantity": 10
+    "name": "Client from bruno"
   }
 }

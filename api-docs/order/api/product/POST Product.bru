@@ -1,0 +1,18 @@
+meta {
+  name: POST Product
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{order_api_url}}/products
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Product from bruno",
+    "price": 10
+  }
+}

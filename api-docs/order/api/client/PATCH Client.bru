@@ -1,11 +1,11 @@
 meta {
-  name: PATCH Item
+  name: PATCH Client
   type: http
-  seq: 4
+  seq: 3
 }
 
 patch {
-  url: {{api_url}}/items/:id
+  url: {{order_api_url}}/clients/:id
   body: json
   auth: none
 }
@@ -16,6 +16,6 @@ params:path {
 
 body:json {
   {
-    "teste": "name UPDATED"
+    "name": "Client from bruno updated"
   }
 }

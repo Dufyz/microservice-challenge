@@ -1,0 +1,18 @@
+meta {
+  name: POST Item
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{inventory_api_url}}/items
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "name",
+    "quantity": 10
+  }
+}

@@ -1,0 +1,21 @@
+meta {
+  name: PATCH Item
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{inventory_api_url}}/items/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 1
+}
+
+body:json {
+  {
+    "teste": "name UPDATED"
+  }
+}
