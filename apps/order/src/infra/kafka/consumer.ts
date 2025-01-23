@@ -2,7 +2,7 @@ import kafka from ".";
 
 export const kafkaConsumer = async (topic: string) => {
   const consumer = kafka.consumer({
-    groupId: "inventory-group",
+    groupId: "order-group",
     allowAutoTopicCreation: true,
   });
 
