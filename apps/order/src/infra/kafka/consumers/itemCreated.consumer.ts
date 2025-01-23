@@ -3,7 +3,7 @@ import { productRepository } from "../../database/repositories/product.repositor
 import { kafkaConsumer } from "../consumer";
 
 export const itemCreatedConsumer = async () => {
-  const consumer = await kafkaConsumer("item_created");
+  const consumer = await kafkaConsumer("order-group-1", "item_created");
 
   await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {

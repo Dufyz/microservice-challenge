@@ -4,12 +4,14 @@ import { Either, failure, success } from "../../../shared/utils/either";
 import { RepositoryErrors } from "../../errors";
 import { OrderRepository } from "../../interfaces/order.repository";
 import { OrderProductRepository } from "../../interfaces/order_product.repository";
+import { Producer } from "../../interfaces/producer";
 import { createOrderProduct } from "../order_product";
 
 export const createOrder =
   (
     orderRepository: OrderRepository,
-    orderProductRepository: OrderProductRepository
+    orderProductRepository: OrderProductRepository,
+    producer: Producer
   ) =>
   async (
     body: Pick<Order, "client_id"> & {
@@ -36,6 +38,20 @@ export const createOrder =
     });
 
     await Promise.all(promises);
+
+    producer.sendMessage("order_created", {
+      order: {
+        id: order.id,
+        client_id: order.client_id,
+        created_at: order.created_at,
+        updated_at: order.updated_at,
+        products: body.products.map((product) => ({
+          product_id: product.product_id,
+          quantity: product.quantity,
+          price: product.price,
+        })),
+      },
+    });
 
     return success(order);
   };
