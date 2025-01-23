@@ -46,8 +46,9 @@ export const clientRepository: ClientRepository = {
   },
   update: async (id, body) => {
     try {
-      const clientToUpdate: Partial<Pick<Client, "name">> = {
+      const clientToUpdate: Partial<Pick<Client, "name" | "updated_at">> = {
         name: body.name,
+        updated_at: new Date(),
       };
 
       const colsToUpdate = Object.keys(

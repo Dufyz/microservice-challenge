@@ -91,9 +91,18 @@ export const itemRepository: ItemRepository = {
   },
   updateQuantity: async (id, quantity) => {
     try {
+      const itemToUpdate: Pick<Item, "quantity" | "updated_at"> = {
+        quantity,
+        updated_at: new Date(),
+      };
+
+      const colsToUpdate = Object.keys(
+        itemToUpdate
+      ) as (keyof typeof itemToUpdate)[];
+
       await sql`
         UPDATE items
-        SET quantity = ${quantity}
+        SET ${sql(itemToUpdate, colsToUpdate)}
         WHERE id = ${id}
       `;
 

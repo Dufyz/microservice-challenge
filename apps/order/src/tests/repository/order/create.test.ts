@@ -24,6 +24,7 @@ describe("Order repository - Create", () => {
     expect(orderOrError.value).toEqual({
       id: expect.any(Number),
       client_id: client.id,
+      status: "pending",
       created_at: expect.any(Date),
       updated_at: expect.any(Date),
     });

@@ -51,11 +51,13 @@ export const productRepository: ProductRepository = {
 
   update: async (id, body) => {
     try {
-      const productToUpdate: Partial<Pick<Product, "name" | "price">> =
-        filterObjNullishValues({
-          name: body.name,
-          price: body.price,
-        });
+      const productToUpdate: Partial<
+        Pick<Product, "name" | "price" | "updated_at">
+      > = filterObjNullishValues({
+        name: body.name,
+        price: body.price,
+        updated_at: new Date(),
+      });
 
       const colsToUpdate = Object.keys(
         productToUpdate
