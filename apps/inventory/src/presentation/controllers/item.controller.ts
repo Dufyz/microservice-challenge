@@ -12,6 +12,7 @@ import { patchItemSchema } from "../validators/schemas/item/patchItem.schema";
 import { itemInventoryAvailable } from "../../application/usecases/item/itemInventoryAvailability.usecase";
 import { postItemInventoryAvailable } from "../validators/schemas/item/postItemInventoryAvailable";
 import { inventoryTransactionRepository } from "../../infra/database/repositories/inventory_transactions.repository";
+import { kafkaProducer } from "../../infra/kafka/producer";
 
 export async function handleGetItem(req: Request, res: Response) {
   const { id } = req.params as unknown as z.infer<
@@ -45,7 +46,8 @@ export async function handlePostItem(req: Request, res: Response) {
 
   const itemOrError = await createItem(
     itemRepository,
-    inventoryTransactionRepository
+    inventoryTransactionRepository,
+    kafkaProducer
   )({ name, quantity });
 
   if (itemOrError.isFailure()) {

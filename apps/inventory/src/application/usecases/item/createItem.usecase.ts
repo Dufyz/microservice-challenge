@@ -3,12 +3,14 @@ import { Either, failure, success } from "../../../shared/utils/either";
 import { RepositoryErrors } from "../../errors";
 import { InventoryTransactionRepository } from "../../interfaces/inventory_transaction.repository";
 import { ItemRepository } from "../../interfaces/item.repository";
+import { Producer } from "../../interfaces/producer";
 import { createInventoryTransaction } from "../inventory_transaction";
 
 export const createItem =
   (
     itemRepository: ItemRepository,
-    inventoryTransaction: InventoryTransactionRepository
+    inventoryTransaction: InventoryTransactionRepository,
+    producer: Producer
   ) =>
   async (
     body: Pick<Item, "name" | "quantity">
@@ -36,6 +38,10 @@ export const createItem =
 
     if (inventoryTransactionOrError.isFailure())
       return failure(inventoryTransactionOrError.value);
+
+    producer.sendMessage("item_created", {
+      item,
+    });
 
     return success(item);
   };
