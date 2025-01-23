@@ -2,6 +2,7 @@ import helmet from "helmet";
 import express from "express";
 import { NODE_ENV, SERVER_PORT } from "../infra/config";
 import routes from "../presentation/routes";
+import "../infra/kafka/consumers";
 
 require("dotenv").config();
 
