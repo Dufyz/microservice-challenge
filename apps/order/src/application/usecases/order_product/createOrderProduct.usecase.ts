@@ -6,7 +6,7 @@ import { OrderProductRepository } from "../../interfaces/order_product.repositor
 export const createOrderProduct =
   (orderProductRepository: OrderProductRepository) =>
   async (
-    body: Pick<OrderProduct, "order_id" | "product_id" | "quantity">
+    body: Pick<OrderProduct, "order_id" | "product_id" | "quantity" | "price">
   ): Promise<Either<RepositoryErrors, OrderProduct>> => {
     const orderProductOrError = await orderProductRepository.create(body);
 

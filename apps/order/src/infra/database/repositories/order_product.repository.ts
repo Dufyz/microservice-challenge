@@ -12,11 +12,12 @@ export const orderProductRepository: OrderProductRepository = {
     try {
       const orderProductToCreate: Pick<
         OrderProduct,
-        "order_id" | "product_id" | "quantity"
+        "order_id" | "product_id" | "quantity" | "price"
       > = {
         order_id: body.order_id,
         product_id: body.product_id,
         quantity: body.quantity,
+        price: body.price,
       };
 
       const colsToInsert = Object.keys(
@@ -28,7 +29,7 @@ export const orderProductRepository: OrderProductRepository = {
                   orderProductToCreate,
                   colsToInsert
                 )}
-                RETURNING id, order_id, product_id, quantity, created_at, updated_at
+                RETURNING id, order_id, product_id, quantity, price, created_at, updated_at
             `;
 
       return success(parseOrderProductFromDB(orderProduct as OrderProduct));

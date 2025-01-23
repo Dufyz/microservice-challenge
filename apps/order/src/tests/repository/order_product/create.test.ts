@@ -40,6 +40,7 @@ describe("OrderProduct repository - Create", () => {
       order_id: orderOrError.value.id,
       product_id: product.id,
       quantity: 1,
+      price: product.price,
     });
 
     if (orderProductOrError.isFailure()) {
@@ -52,6 +53,7 @@ describe("OrderProduct repository - Create", () => {
       order_id: order.id,
       product_id: product.id,
       quantity: 1,
+      price: product.price,
       created_at: expect.any(Date),
       updated_at: expect.any(Date),
     });

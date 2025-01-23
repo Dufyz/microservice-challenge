@@ -7,6 +7,7 @@ export const postOrderSchema = z.object({
       z.object({
         product_id: z.coerce.number(),
         quantity: z.coerce.number(),
+        price: z.coerce.number(),
       })
     ),
   }),

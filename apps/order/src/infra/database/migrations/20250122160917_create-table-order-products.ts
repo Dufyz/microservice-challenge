@@ -7,6 +7,7 @@ export async function up(knex: Knex): Promise<void> {
             order_id INT NOT NULL REFERENCES orders(id),
             product_id INT NOT NULL REFERENCES products(id),
             quantity INT NOT NULL,
+            price INT NOT NULL,
             created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
             updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
         );

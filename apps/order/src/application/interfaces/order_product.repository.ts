@@ -4,6 +4,6 @@ import { RepositoryErrors } from "../errors";
 
 export type OrderProductRepository = {
   create(
-    body: Pick<OrderProduct, "order_id" | "product_id" | "quantity">
+    body: Pick<OrderProduct, "order_id" | "product_id" | "quantity" | "price">
   ): Promise<Either<RepositoryErrors, OrderProduct>>;
 };

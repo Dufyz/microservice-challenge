@@ -6,6 +6,7 @@ export const parseOrderProductFromDB = (
   id: orderProduct.id,
   order_id: orderProduct.order_id,
   product_id: orderProduct.product_id,
+  price: orderProduct.price,
   quantity: orderProduct.quantity,
   created_at: orderProduct.created_at,
   updated_at: orderProduct.updated_at,

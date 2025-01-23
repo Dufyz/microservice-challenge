@@ -13,7 +13,7 @@ export const createOrder =
   ) =>
   async (
     body: Pick<Order, "client_id"> & {
-      products: { product_id: number; quantity: number }[];
+      products: { product_id: number; quantity: number; price: number }[];
     }
   ): Promise<Either<RepositoryErrors, Order>> => {
     const orderOrError = await orderRepository.create(body);
@@ -30,6 +30,7 @@ export const createOrder =
           order_id: order.id,
           quantity: product.quantity,
           product_id: product.product_id,
+          price: product.price,
         })
       );
     });
